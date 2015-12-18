@@ -78,6 +78,7 @@ Blockly.Css.inject = function(hasCss, pathToMedia) {
   if (hasCss) {
     text += Blockly.Css.CONTENT.join('\n');
     if (Blockly.FieldDate) {
+      console.log("FieldData is enable");
       text += Blockly.FieldDate.CSS.join('\n');
     }
   }

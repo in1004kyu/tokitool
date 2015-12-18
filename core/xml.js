@@ -346,7 +346,9 @@ Blockly.Xml.domToBlockHeadless_ =
   if (!prototypeName) {
     throw 'Block type unspecified: \n' + xmlBlock.outerHTML;
   }
+
   var id = xmlBlock.getAttribute('id');
+
   if (opt_reuseBlock && id) {
     // Only used by realtime.
     block = Blockly.Block.getById(id, workspace);
@@ -364,6 +366,7 @@ Blockly.Xml.domToBlockHeadless_ =
     block.parent_ = parentBlock;
   } else {
     block = Blockly.Block.obtain(workspace, prototypeName);
+   // console.log(block);
   }
 
   var blockChild = null;

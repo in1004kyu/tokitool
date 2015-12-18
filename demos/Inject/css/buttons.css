@@ -1,0 +1,170 @@
+/* ScratchJr © Massachusetts Institute of Technology and Tufts University - 2014, All Rights Reserved. */
+
+.button {
+
+}
+
+.button a, .button a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+.button {
+  line-height: ${30 * scaleMultiplier}px;
+  -webkit-border-radius: ${5 * scaleMultiplier}px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  overflow: visible;
+  font-weight:normal;
+  margin: ${3 * scaleMultiplier}px;
+  height: ${32 * scaleMultiplier}px;  
+  text-shadow: 0 ${1 * scaleMultiplier}px #fff;
+  font-weight: normal;
+  color: #777;
+  border: 1px solid #ccc;
+  background-color: #e6e6e6;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#f2f2f2));
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #f2f2f2);
+  -webkit-box-shadow: inset 0 ${1 * scaleMultiplier}px 0 rgba(255, 255, 255, 0.2), 0 ${1 * scaleMultiplier}px ${2 * scaleMultiplier}px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+}
+
+.button.round {
+	text-shadow: 0 ${2 * scaleMultiplier}px #fff;
+	line-height: ${48 * scaleMultiplier}px;
+ 	border-radius: ${32 * scaleMultiplier}px;
+ 	width: ${48 * scaleMultiplier}px;
+ 	height: ${48 * scaleMultiplier}px;
+}
+
+.button.square {
+	text-shadow: 0 ${2 * scaleMultiplier}px #fff;
+	line-height: ${48 * scaleMultiplier}px;
+ 	border-radius: ${12 * scaleMultiplier}px;
+ 	width: ${48 * scaleMultiplier}px;
+ 	height: ${48 * scaleMultiplier}px;
+}
+
+.button.orange {
+  text-shadow: none;
+  color: #fff;
+  border: 1px solid #FFB000;
+  background-color: #FFA200;
+  -webkit-box-shadow: inset 0 ${1 * scaleMultiplier}px ${1 * scaleMultiplier}px #FFD683;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FFB000), color-stop(25%, #FFB000), to(#FFA200));
+  background-image: -webkit-linear-gradient(#FFB000, #FFB000 25%, #FFA200);
+}
+
+.button.blue {
+  text-shadow: none;
+  color: #fff;
+  background-color: #169fdb;
+  border: 1px solid #0d85b9;
+  -webkit-box-shadow: inset 0 ${1 * scaleMultiplier}px ${1 * scaleMultiplier}px #85DFFF;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#30aadf), color-stop(25%, #30aadf), to(#169fdb));
+  background-image: -webkit-linear-gradient(#30aadf, #30aadf 25%, #169fdb);
+}
+
+.button.centered {
+	width: ${120 * scaleMultiplier}px;
+  text-align: center; 
+  margin-left: ${16 * scaleMultiplier}px;
+}
+
+.button>span,
+.button>a {
+  padding: ${8 * scaleMultiplier}px ${10 * scaleMultiplier}px;
+  font-family: Verdana;
+  font-size: ${14 * scaleMultiplier}px;
+}
+
+.button.round.decimalpoint>span {
+  padding: ${8 * scaleMultiplier}px ${16 * scaleMultiplier}px;
+  font-family: Verdana;
+  font-size: ${36 * scaleMultiplier}px;
+}
+
+.button.square.clear>span {
+  padding: ${6 * scaleMultiplier}px ${30 * scaleMultiplier}px;
+  font-family: Verdana;
+  font-size: ${32 * scaleMultiplier}px;
+}
+
+.button.square.del>div {
+  padding: ${0 * scaleMultiplier}px;
+ 	width: ${48 * scaleMultiplier}px;
+ 	height: ${48 * scaleMultiplier}px;  
+	background: url('../assets/ui/deletekey.png');
+}
+
+.button.round.minus>span {
+  padding: ${8 * scaleMultiplier}px ${14 * scaleMultiplier}px;
+  font-family: Verdana;
+  font-size: ${36 * scaleMultiplier}px;
+}
+
+.button.round>span {
+  padding: ${6 * scaleMultiplier}px ${13 * scaleMultiplier}px;
+  font-family: Verdana;
+  font-size: ${32 * scaleMultiplier}px;
+}
+
+.button:active {
+  background-image: -webkit-linear-gradient(top,#f2f2f2,#ffffff);
+  color: #000;
+  -webkit-transition: 0.1s linear all;
+  -webkit-box-shadow: inset 0 ${1 * scaleMultiplier}px 0 rgba(255, 255, 255, 0), 0 ${3 * scaleMultiplier}px ${3 * scaleMultiplier}px rgba(255, 255, 255, 1);
+  text-decoration: none;
+}
+
+.button.blue:active {
+ 	border: 1px active #0d85b9;
+  background-image: -webkit-linear-gradient(top,#169fdb,#169fdb);
+  color: #000;
+  -webkit-transition: 0.1s linear all;
+  -webkit-box-shadow: inset 0 ${1 * scaleMultiplier}px 0 rgba(255, 255, 255, 0.2), 0 ${3 * scaleMultiplier}px ${3 * scaleMultiplier}px rgba(200,200, 200, 0.5);
+  text-decoration: none;
+}
+ 
+.button:active .dropdown-toggle:after, .button.on .dropdown-toggle:after {
+  filter: alpha(opacity=100);
+  -khtml-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+
+.button.on {
+  border-color: #ccc;
+  border-top-color: #999;
+  -moz-box-shadow: inset 0 ${1 * scaleMultiplier}px ${1 * scaleMultiplier}px #aaa;
+  -ms-box-shadow: inset 0 ${1 * scaleMultiplier}px ${1 * scaleMultiplier}px #aaa; 
+  -webkit-box-shadow: inset 0 ${1 * scaleMultiplier}px ${1 * scaleMultiplier}px #aaa;
+  box-shadow: inset 0 ${1 * scaleMultiplier}px ${1 * scaleMultiplier}px #aaa;
+  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0,#fff),color-stop(100%,#e0e0e6));
+  background-image: -webkit-linear-gradient(bottom,#fff 0,#e0e0e6 100%);
+  color: #000;
+}
+
+.button.disabled {
+  color: #999;
+  background-image: none;
+  background-color: #eee;
+}
+
+.button.disabled:active {
+  cursor: default;
+  border-color: #ccc;
+  -webkit-box-shadow: none;
+}
+
+.button.disabled:active .dropdown-toggle:after {
+  filter: alpha(opacity=50);
+  -khtml-opacity: 0.5;
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+}
+
+

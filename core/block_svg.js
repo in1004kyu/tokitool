@@ -1307,6 +1307,7 @@ Blockly.BlockSvg.prototype.updateColour = function() {
     // Disabled blocks don't have colour.
     return;
   }
+  //#a55b5b
   var hexColour = Blockly.makeColour(this.getColour());
   var rgb = goog.color.hexToRgb(hexColour);
   if (this.isShadow()) {
@@ -1321,6 +1322,7 @@ Blockly.BlockSvg.prototype.updateColour = function() {
     this.svgPathLight_.setAttribute('stroke', hexLight);
     this.svgPathDark_.setAttribute('fill', hexDark);
   }
+  
   this.svgPath_.setAttribute('fill', hexColour);
 
   var icons = this.getIcons();
@@ -1783,6 +1785,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
  * @private
  */
 Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
+  //console.log(this.type);
   this.startHat_ = false;
   // Should the top and bottom left corners be rounded or square?
   if (this.outputConnection) {
@@ -1822,14 +1825,27 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
   var highlightSteps = [];
   var highlightInlineSteps = [];
 
+  // 실제 그려지는 path는 steps에 저장됨.
+  console.log(connectionsXY);
+  console.log(inputRows);
+  
   this.renderDrawTop_(steps, highlightSteps, connectionsXY,
       inputRows.rightEdge);
+  
   var cursorY = this.renderDrawRight_(steps, highlightSteps, inlineSteps,
       highlightInlineSteps, connectionsXY, inputRows, iconWidth);
+  
   this.renderDrawBottom_(steps, highlightSteps, connectionsXY, cursorY);
   this.renderDrawLeft_(steps, highlightSteps, connectionsXY, cursorY);
+  //
 
+  console.log(steps);
+  console.log(highlightSteps);
+  console.log(highlightInlineSteps);
+
+  console.log(inlineSteps);
   var pathString = steps.join(' ') + '\n' + inlineSteps.join(' ');
+  console.log(pathString);
   this.svgPath_.setAttribute('d', pathString);
   this.svgPathDark_.setAttribute('d', pathString);
   pathString = highlightSteps.join(' ') + '\n' + highlightInlineSteps.join(' ');
@@ -1870,13 +1886,17 @@ Blockly.BlockSvg.prototype.renderDrawTop_ =
     // Top-left rounded corner.
     steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER);
     highlightSteps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_HIGHLIGHT);
+    console.log(Blockly.BlockSvg.TOP_LEFT_CORNER);
   }
 
   // Top edge.
   if (this.previousConnection) {
+    console.log(steps);
     steps.push('H', Blockly.BlockSvg.NOTCH_WIDTH - 15);
     highlightSteps.push('H', Blockly.BlockSvg.NOTCH_WIDTH - 15);
+    console.log(steps);
     steps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT);
+    console.log(steps);
     highlightSteps.push(Blockly.BlockSvg.NOTCH_PATH_LEFT_HIGHLIGHT);
     // Create previous block connection.
     var connectionX = connectionsXY.x + (this.RTL ?
@@ -2215,24 +2235,34 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ =
  */
 Blockly.BlockSvg.prototype.renderDrawLeft_ =
     function(steps, highlightSteps, connectionsXY, cursorY) {
+      console.log(steps);
   if (this.outputConnection) {
     // Create output connection.
     this.outputConnection.moveTo(connectionsXY.x, connectionsXY.y);
     // This connection will be tightened when the parent renders.
-    steps.push('V', Blockly.BlockSvg.TAB_HEIGHT);
-    steps.push('c 0,-10 -' + Blockly.BlockSvg.TAB_WIDTH + ',8 -' +
-        Blockly.BlockSvg.TAB_WIDTH + ',-7.5 s ' + Blockly.BlockSvg.TAB_WIDTH +
-        ',2.5 ' + Blockly.BlockSvg.TAB_WIDTH + ',-7.5');
+
+    if(this.type == "math_number") {
+      steps.push('l -5 -6' );
+    } else {    
+      steps.push('V', Blockly.BlockSvg.TAB_HEIGHT);
+      steps.push('c 0,-10 -' + Blockly.BlockSvg.TAB_WIDTH + ',8 -' +
+          Blockly.BlockSvg.TAB_WIDTH + ',-7.5 s ' + Blockly.BlockSvg.TAB_WIDTH +
+          ',2.5 ' + Blockly.BlockSvg.TAB_WIDTH + ',-7.5');
+    }
     if (this.RTL) {
       highlightSteps.push('M', (Blockly.BlockSvg.TAB_WIDTH * -0.25) + ',8.4');
       highlightSteps.push('l', (Blockly.BlockSvg.TAB_WIDTH * -0.45) + ',-2.1');
     } else {
-      highlightSteps.push('V', Blockly.BlockSvg.TAB_HEIGHT - 1.5);
-      highlightSteps.push('m', (Blockly.BlockSvg.TAB_WIDTH * -0.92) +
-                          ',-0.5 q ' + (Blockly.BlockSvg.TAB_WIDTH * -0.19) +
-                          ',-5.5 0,-11');
-      highlightSteps.push('m', (Blockly.BlockSvg.TAB_WIDTH * 0.92) +
-                          ',1 V 0.5 H 1');
+      if(this.type == "math_number") {
+       steps.push('l -5 -6' );
+      } else {
+        highlightSteps.push('V', Blockly.BlockSvg.TAB_HEIGHT - 1.5);
+        highlightSteps.push('m', (Blockly.BlockSvg.TAB_WIDTH * -0.92) +
+                            ',-0.5 q ' + (Blockly.BlockSvg.TAB_WIDTH * -0.19) +
+                            ',-5.5 0,-11');
+        highlightSteps.push('m', (Blockly.BlockSvg.TAB_WIDTH * 0.92) +
+                            ',1 V 0.5 H 1');
+      }
     }
     this.width += Blockly.BlockSvg.TAB_WIDTH;
   } else if (!this.RTL) {

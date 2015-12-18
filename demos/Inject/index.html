@@ -1,0 +1,57 @@
+<!--
+ScratchJr © Massachusetts Institute of Technology and Tufts University - 2014, All Rights Reserved.
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="cache-control" content="no-cache">
+
+<head>
+<title>TOKI</title>
+<script type="text/javascript" src="js/utils/lib.js"></script>
+<script>
+    //preprocessAndLoadCss("css", "css/editor.css");
+
+</script>
+
+
+<script language="javascript">
+
+function createScratchJr(){
+
+/*
+  iOS.getsettings(doNext);
+  function doNext (str){
+    var list = str.split(",");
+    iOS.path =list[1] == "0" ?  list[0] + "/" : undefined ;
+    Record.available = false;
+    Camera.available = false;
+    //if (list.length > 2) Record.available = list[2] == "YES" ? true : false;
+    //if (list.length > 3) Camera.available = list[3] == "YES" ? true : false;
+    ScratchJr.appinit("iOSv01");
+    }
+    */
+  }
+
+</script>
+
+
+</head>
+<style type='text/css' href="css/font.css"> </style>
+<style type='text/css' href="css/base.css"> </style>
+<style type='text/css' href="css/editor.css"> </style>
+<style type='text/css' href="css/editorleftpanel.css"> </style>
+<style type='text/css' href="css/editorstage.css"> </style>
+<style type='text/css' href="css/editormodal.css"> </style>
+<style type='text/css' href="css/librarymodal.css"> </style>
+<style type='text/css' href="css/paointlook.css"> </style>
+
+<body onload="createScratchJr();" style="background: white;">
+<div class="frame" id="frame"></div>
+<div class="libframe" id="libframe"></div>
+<div class="paintframe" id="paintframe"></div>
+
+</body>
+</html>

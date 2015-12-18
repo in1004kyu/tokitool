@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <title>Blockly Demo: Fixed Blockly</title>
-  <script src="../../blockly_compressed.js"></script>
+  <script src="../../blockly_uncompressed.js"></script>
   <script src="../../blocks_compressed.js"></script>
   <script src="../../msg/js/en.js"></script>
+  <script src="../../blocks/inkyu.js"></script>
   <style>
     body {
       background-color: #fff;
@@ -28,6 +29,9 @@
   <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
 
   <xml id="toolbox" style="display: none">
+
+    <block type="math_number"></block>
+  
     <block type="controls_if"></block>
     <block type="logic_compare"></block>
     <block type="controls_repeat_ext"></block>
@@ -35,12 +39,32 @@
     <block type="math_arithmetic"></block>
     <block type="text"></block>
     <block type="text_print"></block>
-  </xml>
+    <block type="text_inkyu"></block>
+    <block type="text_inkyu2"></block>
 
+
+
+  </xml>
+<!--
+  <xml id="toolbox" style="display: none">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="math_number"></block>
+    <block type="math_arithmetic"></block>
+    <block type="text"></block>
+    <block type="text_print"></block>
+    <block type="text_inkyu"></block>
+    <block type="text_inkyu2"></block>
+
+
+  </xml>
+-->
   <script>
     var workspace = Blockly.inject('blocklyDiv',
         {media: '../../media/',
-         toolbox: document.getElementById('toolbox')});
+         toolbox: document.getElementById('toolbox')
+          });
   </script>
 
 </body>

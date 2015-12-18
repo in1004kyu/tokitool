@@ -353,6 +353,7 @@ Blockly.Flyout.prototype.hide = function() {
  *     Variables and procedures have a custom set of blocks.
  */
 Blockly.Flyout.prototype.show = function(xmlList) {
+ // console.log(this);
   this.hide();
   // Delete any blocks from a previous showing.
   var blocks = this.workspace_.getTopBlocks(false);
@@ -366,7 +367,6 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     goog.dom.removeNode(rect);
   }
   this.buttons_.length = 0;
-
   if (xmlList == Blockly.Variables.NAME_TYPE) {
     // Special category for variables.
     xmlList =
@@ -376,16 +376,17 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     xmlList =
         Blockly.Procedures.flyoutCategory(this.workspace_.targetWorkspace);
   }
-
   var margin = this.CORNER_RADIUS;
   this.svgGroup_.style.display = 'block';
   // Create the blocks to be shown in this flyout.
   var blocks = [];
   var gaps = [];
   for (var i = 0, xml; xml = xmlList[i]; i++) {
+   // console.log(xml);
     if (xml.tagName && xml.tagName.toUpperCase() == 'BLOCK') {
       var block = Blockly.Xml.domToBlock(
           /** @type {!Blockly.Workspace} */ (this.workspace_), xml);
+ //     console.log(block);
       blocks.push(block);
       var gap = parseInt(xml.getAttribute('gap'), 10);
       gaps.push(gap || margin * 3);
@@ -406,6 +407,8 @@ Blockly.Flyout.prototype.show = function(xmlList) {
       // try this, I'm sure.  Kill the comment.
       child.setCommentText(null);
     }
+   // console.log(block);
+    //test
     block.render();
     var root = block.getSvgRoot();
     var blockHW = block.getHeightWidth();

@@ -7,7 +7,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ 
  *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -32,47 +32,8 @@ var Code = {};
  * Lookup for names of supported languages.  Keys should be in ISO 639 format.
  */
 Code.LANGUAGE_NAME = {
-  'ar': 'العربية',
-  'be-tarask': 'Taraškievica',
-  'br': 'Brezhoneg',
-  'ca': 'Català',
-  'cs': 'Česky',
-  'da': 'Dansk',
-  'de': 'Deutsch',
-  'el': 'Ελληνικά',
   'en': 'English',
-  'es': 'Español',
-  'fa': 'فارسی',
-  'fr': 'Français',
-  'he': 'עברית',
-  'hrx': 'Hunsrik',
-  'hu': 'Magyar',
-  'ia': 'Interlingua',
-  'is': 'Íslenska',
-  'it': 'Italiano',
-  'ja': '日本語',
-  'ko': '한국어',
-  'mk': 'Македонски',
-  'ms': 'Bahasa Melayu',
-  'nb': 'Norsk Bokmål',
-  'nl': 'Nederlands, Vlaams',
-  'oc': 'Lenga d\'òc',
-  'pl': 'Polski',
-  'pms': 'Piemontèis',
-  'pt-br': 'Português Brasileiro',
-  'ro': 'Română',
-  'ru': 'Русский',
-  'sc': 'Sardu',
-  'sk': 'Slovenčina',
-  'sr': 'Српски',
-  'sv': 'Svenska',
-  'th': 'ภาษาไทย',
-  'tlh': 'tlhIngan Hol',
-  'tr': 'Türkçe',
-  'uk': 'Українська',
-  'vi': 'Tiếng Việt',
-  'zh-hans': '簡體中文',
-  'zh-hant': '正體中文'
+  'ko': '한국어'
 };
 
 /**
@@ -499,7 +460,10 @@ Code.runJS = function() {
       throw MSG['timeout'];
     }
   };
+  console.log(Code.workspace);
+
   var code = Blockly.JavaScript.workspaceToCode(Code.workspace);
+
   Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
   try {
     eval(code);
