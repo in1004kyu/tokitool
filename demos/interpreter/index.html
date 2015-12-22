@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Blockly Demo: JS Interpreter</title>
   <script src="acorn_interpreter.js"></script>
-  <script src="../../blockly_compressed.js"></script>
+  <script src="../../blockly_uncompressed.js"></script>
   <script src="../../blocks_compressed.js"></script>
   <script src="../../javascript_compressed.js"></script>
   <script src="../../msg/js/en.js"></script>
@@ -30,6 +30,8 @@
   <p>
     <button onclick="parseCode()">Parse JavaScript</button>
     <button onclick="stepCode()" id="stepButton" disabled="disabled">Step JavaScript</button>
+    <button onclick="runCode()" id="runButton" disabled="disabled">Run JavaScript</button>
+    <button onclick="autoCode()" id="autoButton" disabled="disabled">autorun JavaScript</button>
   </p>
 
   <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
@@ -126,7 +128,6 @@
          toolbox: document.getElementById('toolbox')});
     Blockly.Xml.domToWorkspace(workspace,
         document.getElementById('startBlocks'));
-
     var myInterpreter = null;
 
     function initApi(interpreter, scope) {
@@ -164,14 +165,23 @@
 
     function parseCode() {
       // Generate JavaScript code and parse it.
+      Blockly.JavaScript.STATEMENT_PREFIX = '';
+      var code_nohighlightBlock = Blockly.JavaScript.workspaceToCode(workspace);
+
       Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
       Blockly.JavaScript.addReservedWords('highlightBlock');
       var code = Blockly.JavaScript.workspaceToCode(workspace);
       myInterpreter = new Interpreter(code, initApi);
-
-      alert('Ready to execute this code:\n\n' + code);
+      
+      //myInterpreter = new Interpreter(code_nohighlightBlock, initApi);
+      //alert('Ready to execute this code:\n\n' + code);
+      alert('Ready to execute this code:\n\n' + code_nohighlightBlock);
       document.getElementById('stepButton').disabled = '';
       highlightPause = false;
+
+      document.getElementById('runButton').disabled = '';
+      document.getElementById('autoButton').disabled='';
+
       workspace.traceOn(true);
       workspace.highlightBlock(null);
     }
@@ -183,9 +193,11 @@
         if (!ok) {
           // Program complete, no more code to execute.
           document.getElementById('stepButton').disabled = 'disabled';
+          document.getElementById('runButton').disabled = 'disabled';
+          document.getElementById('autoButton').disabled = 'disabled';
           return;
         }
-      }
+      }      
       if (highlightPause) {
         // A block has been highlighted.  Pause execution here.
         highlightPause = false;
@@ -193,6 +205,30 @@
         // Keep executing until a highlight statement is reached.
         stepCode();
       }
+    }
+
+    function runCode(){
+        highlightPause = false;
+        workspace.traceOn(false);
+        document.getElementById('runButton').disabled = 'disabled';
+        document.getElementById('stepButton').disabled = 'disabled';
+        document.getElementById('autoButton').disabled = 'disabled';
+        myInterpreter.run();
+    }
+
+    function autoCode() {
+      try {
+        var ok = myInterpreter.step();
+      } finally {
+        if (!ok) {
+          // Program complete, no more code to execute.
+          document.getElementById('stepButton').disabled = 'disabled';
+          document.getElementById('runButton').disabled = 'disabled';
+          document.getElementById('autoButton').disabled = 'disabled';
+          return;
+        }
+      }      
+     window.setTimeout(autoCode, 10);
     }
   </script>
 
